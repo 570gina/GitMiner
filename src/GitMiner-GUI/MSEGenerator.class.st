@@ -74,9 +74,14 @@ MSEGenerator >> generateMSE [
 		verveineJScriptPath: parserPresenter input text asFileReference;
 		mseDestinationPath:
 			destinationPresenter input text asFileReference / fileName input text
-				, 'mse'. self halt
-	"wizard generateMSE.
-	self assert: wizard mseDestinationPath asFileReference exists"
+				, 'mse'.
+	wizard generateMSE.
+	wizard mseDestinationPath asFileReference exists
+		ifTrue: [ self
+				inform:
+					fileName input text , '.mse has been generated on '
+						, destinationPresenter input text,'.' ]
+		ifFalse: [ self inform: 'The MSE file generation failed.' ]
 ]
 
 { #category : #initialization }
